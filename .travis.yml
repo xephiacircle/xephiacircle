@@ -16,5 +16,9 @@
   "sudo": false,
   "group": "stable",
   "dist": "trusty",
-  "os": "linux"
+  "os": "linux",
+  # safelist
+  "branches":
+    only:
+    - firebase
 }
