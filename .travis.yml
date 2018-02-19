@@ -7,6 +7,9 @@
   "install": [
     "npm install -g firebase-tools"
   ],
+    "script": [
+    "set -e"
+  ],
   "after_success": [
     "firebase deploy --non-interactive --token \"$FIREBASE_TOKEN\""
   ],
