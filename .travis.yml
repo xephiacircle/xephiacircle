@@ -1,23 +1,26 @@
-language: node_js
-node_js:
-  - "8.1.3"
-
-branches:
-  only:
-    - master
-
-before_script:
-  - npm install -g firebase-tools
-  - npm install -g preact-cli
-  - npm install
-
-script:
-  - preact build
-
-after_success:
-  - firebase deploy --token $FIREBASE_TOKEN --non-interactive
-
-notifications:
-  email:
-    on_failure: change
-    on_success: change
+{
+  "language": "node_js",
+  "node_js": "7",
+  "before_install": [
+    "rvm install 2.2",
+    "rvm use 2.2",
+    ". $HOME/.nvm/nvm.sh && nvm install 6.1 && nvm use 6.1",
+    "gem install bundler",
+    "bundle check || bundle install"
+  ],
+  "install": [
+    "npm install -g firebase-tools"
+  ],
+  "script": [
+    "set -e",
+    "bundle exec jekyll build"
+  ],
+  "after_success": [
+    "firebase deploy --non-interactive --token \"$FIREBASE_TOKEN\""
+  ],
+  "sudo": false,
+  "global_env": "NOKOGIRI_USE_SYSTEM_LIBRARIES=true",
+  "group": "stable",
+  "dist": "precise",
+  "os": "linux"
+}
